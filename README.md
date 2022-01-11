@@ -7,6 +7,10 @@ Controls:</br>
 - d to move to the right</br>
 - shift to run</br>
 
+Features:</br>
+- basic character movement</br>
+- third person camera</br>
+
 Resources:</br>
 - character (blender)</br>
 - character animation (mixamo)</br>

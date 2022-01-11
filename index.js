@@ -320,7 +320,6 @@ class WalkingState extends State {
   }
 };
 
-
 class RunningState extends State {
   constructor(parent) {
     super(parent);
@@ -368,7 +367,6 @@ class RunningState extends State {
   }
 };
 
-
 class IdleState extends State {
   constructor(parent) {
     super(parent);
@@ -403,7 +401,6 @@ class IdleState extends State {
     }
   }
 };
-
 
 class ThirdPersonCamera {
   constructor(params) {
@@ -577,7 +574,6 @@ class Main {
     this._thirdPersonCamera.Update(timeElapsedS);
   }
 }
-
 
 let _APP = null;
 
