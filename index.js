@@ -18,7 +18,7 @@ class BasicCharacterController {
 
   _Init(params) {
     this._params = params;
-    this._decceleration = new THREE.Vector3(-0.0005, -0.0001, -5.0);
+    this._deceleration = new THREE.Vector3(-0.0005, -0.0001, -5.0);
     this._acceleration = new THREE.Vector3(1, 0.25, 50.0);
     this._velocity = new THREE.Vector3(0, 0, 0);
     this._position = new THREE.Vector3();
@@ -88,16 +88,16 @@ class BasicCharacterController {
     this._stateMachine.Update(timeInSeconds, this._input);
 
     const velocity = this._velocity;
-    const frameDecceleration = new THREE.Vector3(
-        velocity.x * this._decceleration.x,
-        velocity.y * this._decceleration.y,
-        velocity.z * this._decceleration.z
+    const framedeceleration = new THREE.Vector3(
+        velocity.x * this._deceleration.x,
+        velocity.y * this._deceleration.y,
+        velocity.z * this._deceleration.z
     );
-    frameDecceleration.multiplyScalar(timeInSeconds);
-    frameDecceleration.z = Math.sign(frameDecceleration.z) * Math.min(
-        Math.abs(frameDecceleration.z), Math.abs(velocity.z));
+    framedeceleration.multiplyScalar(timeInSeconds);
+    framedeceleration.z = Math.sign(framedeceleration.z) * Math.min(
+        Math.abs(framedeceleration.z), Math.abs(velocity.z));
 
-    velocity.add(frameDecceleration);
+    velocity.add(framedeceleration);
 
     const controlObject = this._target;
     const _Q = new THREE.Quaternion();
@@ -478,17 +478,18 @@ class Main {
     light.position.set(-100, 100, 100);
     light.target.position.set(0, 0, 0);
     light.castShadow = true;
-    light.shadow.bias = -0.001;
+    light.shadow.bias = -0.0001;
+    
     light.shadow.mapSize.width = 4096;
     light.shadow.mapSize.height = 4096;
-    light.shadow.camera.near = 0.1;
+
     light.shadow.camera.far = 500.0;
     light.shadow.camera.near = 0.5;
-    light.shadow.camera.far = 500.0;
-    light.shadow.camera.left = 50;
-    light.shadow.camera.right = -50;
-    light.shadow.camera.top = 50;
-    light.shadow.camera.bottom = -50;
+
+    light.shadow.camera.left = 200;
+    light.shadow.camera.right = -200;
+    light.shadow.camera.top = 200;
+    light.shadow.camera.bottom = -200;
     this._scene.add(light);
 
     light = new THREE.AmbientLight(0xFFFFFF, 0.25);
@@ -516,7 +517,7 @@ class Main {
     grass.repeat.set( 4, 4 ); 
     const material = new THREE.MeshLambertMaterial({ map : grass });
     const plane = new THREE.Mesh(
-        new THREE.PlaneGeometry(200, 200), material);
+        new THREE.PlaneGeometry(200, 200,10,10), material);
     plane.material.side = THREE.DoubleSide;
     plane.castShadow = false;
     plane.receiveShadow = true;
