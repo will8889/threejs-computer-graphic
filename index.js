@@ -1,5 +1,6 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js';
 import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/FBXLoader.js';
+import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/GLTFLoader.js';
 
 class BasicCharacterControllerProxy {
   constructor(animations) {
@@ -413,13 +414,14 @@ class ThirdPersonCamera {
 
   _CalculateIdealOffset() {
     //camera offset location from character
-    const idealOffset = new THREE.Vector3(0, 20, -40);
+    const idealOffset = new THREE.Vector3(0, 20, -50);
     idealOffset.applyQuaternion(this._params.target.Rotation);
     idealOffset.add(this._params.target.Position);
     return idealOffset;
   }
 
   _CalculateIdealLookat() {
+    //camera ideal look at
     const idealLookat = new THREE.Vector3(0, 10, 50);
     idealLookat.applyQuaternion(this._params.target.Rotation);
     idealLookat.add(this._params.target.Position);
@@ -506,7 +508,7 @@ class Main {
     this._scene.background = texture;
 
     //add grass texture to plane
-    const grass = new THREE.TextureLoader().load( "./resources/grass.jpg" );
+    const grass = new THREE.TextureLoader().load( "./resources/grass3.jpg" );
 
     grass.wrapS = THREE.RepeatWrapping; 
     grass.wrapT = THREE.RepeatWrapping;
@@ -514,7 +516,7 @@ class Main {
     grass.repeat.set( 4, 4 ); 
     const material = new THREE.MeshLambertMaterial({ map : grass });
     const plane = new THREE.Mesh(
-        new THREE.PlaneGeometry(200, 200,10,10), material);
+        new THREE.PlaneGeometry(1000, 1000,10,10), material);
     plane.material.side = THREE.DoubleSide;
     plane.castShadow = false;
     plane.receiveShadow = true;
@@ -524,8 +526,20 @@ class Main {
     this._mixers = [];
     this._previousRAF = null;
 
+    this._LoadTree();
     this._LoadAnimatedModel();
     this._RAF();
+  }
+  _LoadTree() {
+    const loader = new GLTFLoader();
+    loader.load('./resources/scene.gltf', (gltf) => {
+      gltf.scene.scale.set(4,4,4);
+      gltf.scene.traverse(c => {
+        c.castShadow = true;
+      });
+      gltf.scene.position.set(0,0,0)
+      this._scene.add(gltf.scene);
+    });
   }
 
   _LoadAnimatedModel() {
