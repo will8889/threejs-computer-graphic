@@ -17,6 +17,7 @@ Resources:</br>
 - character animation (mixamo)</br>
 - grass texture</br>
 - skybox image</br>
+- Tree from https://skfb.ly/ooqYT</br>
 - Tent from https://skfb.ly/or9ZO</br>
 - Campfire from https://skfb.ly/6RJqH</br>
 - Barrel from https://skfb.ly/6BB7B</br>
@@ -25,6 +26,7 @@ Resources:</br>
 - Well from https://skfb.ly/6Boq6</br>
 
 Credit:</br>
+- "Low Poly Tree 2" (https://skfb.ly/ooqYT) by Render Zing is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</br>
 - "Low-poly Survival Tent" (https://skfb.ly/or9ZO) by simonaskLDE is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</br>
 - "Low Poly Wood Barrel" (https://skfb.ly/6BB7B) by RacKrab is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</br>
 - "Logs - Blacksmith's workshop assets" (https://skfb.ly/69CxV) by Kyan0s is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</br>
