@@ -516,7 +516,7 @@ class Main {
     grass.repeat.set( 4, 4 ); 
     const material = new THREE.MeshLambertMaterial({ map : grass });
     const plane = new THREE.Mesh(
-        new THREE.PlaneGeometry(1000, 1000,10,10), material);
+        new THREE.PlaneGeometry(600, 600,10,10), material);
     plane.material.side = THREE.DoubleSide;
     plane.castShadow = false;
     plane.receiveShadow = true;
@@ -526,21 +526,106 @@ class Main {
     this._mixers = [];
     this._previousRAF = null;
 
-    this._LoadTree();
+    for (let i = 1; i <= 4; i++) {
+      this._LoadTree(100,-100+i*50)
+    } 
+    for (let i = 1; i <= 4; i++) {
+      this._LoadTree(-100,-100+i*50)
+    } 
+    for (let i = 1; i <= 4; i++) {
+      this._LoadTree(-100+i*50,-100)
+    } 
+    for (let i = 1; i <= 4; i++) {
+      this._LoadTree(-100+i*50,100)
+    }
+    this._LoadTent(50,0);
+    this._LoadCampfire(50,40);
+    this._LoadBarrel(20,40);
+    this._LoadLog(50,25);
+    this._LoadLogs(-50,30);
+    this._LoadWell(0,-50);
+    //this._LoadTree(0,0);
     this._LoadAnimatedModel();
     this._RAF();
   }
-  _LoadTree() {
+  _LoadTree(x,z) {
     const loader = new GLTFLoader();
-    loader.load('./resources/scene.gltf', (gltf) => {
+    loader.load('./resources/Tree/scene.gltf', (gltf) => {
       gltf.scene.scale.set(4,4,4);
       gltf.scene.traverse(c => {
         c.castShadow = true;
       });
-      gltf.scene.position.set(0,0,0)
+      gltf.scene.position.set(x,0,z)
       this._scene.add(gltf.scene);
     });
   }
+  _LoadTent(x,z) {
+    const loader = new GLTFLoader();
+    loader.load('./resources/Tent/scene.gltf', (gltf) => {
+      gltf.scene.scale.set(4,4,4);
+      gltf.scene.traverse(c => {
+        c.castShadow = true;
+      });
+      gltf.scene.position.set(x,0,z)
+      this._scene.add(gltf.scene);
+    });
+  }
+  _LoadCampfire(x,z) {
+    const loader = new GLTFLoader();
+    loader.load('./resources/Campfire/scene.gltf', (gltf) => {
+      gltf.scene.scale.set(10,10,10);
+      gltf.scene.traverse(c => {
+        c.castShadow = true;
+      });
+      gltf.scene.position.set(x,0,z)
+      this._scene.add(gltf.scene);
+    });
+  }
+  _LoadBarrel(x,z) {
+    const loader = new GLTFLoader();
+    loader.load('./resources/Barrel/scene.gltf', (gltf) => {
+      gltf.scene.scale.set(0.03,0.03,0.03);
+      gltf.scene.traverse(c => {
+        c.castShadow = true;
+      });
+      gltf.scene.position.set(x,0,z)
+      this._scene.add(gltf.scene);
+    });
+  }
+  _LoadLog(x,z) {
+    const loader = new GLTFLoader();
+    loader.load('./resources/Log/scene.gltf', (gltf) => {
+      gltf.scene.scale.set(20,20,20);
+      gltf.scene.traverse(c => {
+        c.castShadow = true;
+      });
+      gltf.scene.position.set(x,2,z)
+      this._scene.add(gltf.scene);
+    });
+  }
+  _LoadLogs(x,z) {
+    const loader = new GLTFLoader();
+    loader.load('./resources/Logs/scene.gltf', (gltf) => {
+      gltf.scene.scale.set(20,20,20);
+      gltf.scene.traverse(c => {
+        c.castShadow = true;
+      });
+      gltf.scene.position.set(x,2,z)
+      this._scene.add(gltf.scene);
+    });
+  }
+  
+  _LoadWell(x,z) {
+    const loader = new GLTFLoader();
+    loader.load('./resources/Well/scene.gltf', (gltf) => {
+      gltf.scene.scale.set(12,12,12);
+      gltf.scene.traverse(c => {
+        c.castShadow = true;
+      });
+      gltf.scene.position.set(x,0,z)
+      this._scene.add(gltf.scene);
+    });
+  } 
 
   _LoadAnimatedModel() {
     const params = {
