@@ -474,7 +474,7 @@ class Main {
 
     //lighting
     let light = new THREE.DirectionalLight(0xFFFFFF, 1.0);
-    light.position.set(-100, 100, 100);
+    light.position.set(-150, 150, 150);
     light.target.position.set(0, 0, 0);
     light.castShadow = true;
     light.shadow.bias = -0.0001;
@@ -485,10 +485,10 @@ class Main {
     light.shadow.camera.far = 500.0;
     light.shadow.camera.near = 0.5;
 
-    light.shadow.camera.left = 200;
-    light.shadow.camera.right = -200;
-    light.shadow.camera.top = 200;
-    light.shadow.camera.bottom = -200;
+    light.shadow.camera.left = 500;
+    light.shadow.camera.right = -500;
+    light.shadow.camera.top = 500;
+    light.shadow.camera.bottom = -500;
     this._scene.add(light);
 
     light = new THREE.AmbientLight(0xFFFFFF, 0.25);
@@ -516,7 +516,7 @@ class Main {
     grass.repeat.set( 4, 4 ); 
     const material = new THREE.MeshLambertMaterial({ map : grass });
     const plane = new THREE.Mesh(
-        new THREE.PlaneGeometry(600, 600,10,10), material);
+        new THREE.PlaneGeometry(400, 400,10,10), material);
     plane.material.side = THREE.DoubleSide;
     plane.castShadow = false;
     plane.receiveShadow = true;
@@ -526,17 +526,17 @@ class Main {
     this._mixers = [];
     this._previousRAF = null;
 
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 2; i++) {
       this._LoadTree(100,-100+i*50)
     } 
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 2; i++) {
       this._LoadTree(-100,-100+i*50)
     } 
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 2; i++) {
       this._LoadTree(-100+i*50,-100)
     } 
-    for (let i = 1; i <= 4; i++) {
-      this._LoadTree(-100+i*50,100)
+    for (let i = 1; i <= 2; i++) {
+      this._LoadTree(-100+i*100,100)
     }
     this._LoadTent(50,0);
     this._LoadCampfire(50,40);
